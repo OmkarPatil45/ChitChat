@@ -6,7 +6,7 @@ export const useChatStore = create( (set,get) => ({
     allContacts: [],
     chats: [],
     messages: [],
-    activeTabs: "chats",
+    activeTab: "chats",
     selectedUser: null,
     isUsersLoading: false,
     isMessagesLoading: false,
