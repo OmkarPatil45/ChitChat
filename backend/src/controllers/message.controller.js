@@ -1,7 +1,9 @@
 import Message from "../models/Message.js";
-import User from "../models/user.js";
+import User from "../models/User.js";
 import cloudinary from "../lib/cloudinary.js";
 import { arcjetProtection } from "../middleware/arcjet.middleware.js";
+import { getReceiverSocketId } from "../lib/socket.js";
+import { io } from "../lib/socket.js";
 
 export const getAllContacts = async(req,res) => {
     try {
@@ -69,7 +71,11 @@ export const sendMessage = async (req,res) => {
 
         await newMessage.save();
 
-        // todo: send message in real-time if user is online by using socket.io
+        
+        const receiverSocketId = getReceiverSocketId(receiverId);
+        if (receiverSocketId) {
+            io.to(receiverSocketId).emit("newMessage", newMessage);
+        }
 
         res.status(201).json(newMessage);
     } catch (error) {
@@ -77,7 +83,7 @@ export const sendMessage = async (req,res) => {
         res.status(500).json({message: "Internal Server error "});
     
     }
-}
+};
 
 export const getChatPartners = async (req,res) => {
     try {
