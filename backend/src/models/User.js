@@ -25,6 +25,9 @@ const userSchema = new mongoose.Schema({
 )
 
 //Creating model
-const User = mongoose.model("User", userSchema)
+// const User = mongoose.model("User", userSchema)
+
+//to avoid model overwrite issue in dev env with hot reloading
+ const User = mongoose.models.User || mongoose.model("User", userSchema);
 
 export default User
