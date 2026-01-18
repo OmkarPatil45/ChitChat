@@ -1,5 +1,5 @@
 import Message from "../models/Message.js";
-import User from "../models/User.js";
+import User from "../models/user.js";
 import cloudinary from "../lib/cloudinary.js";
 import { arcjetProtection } from "../middleware/arcjet.middleware.js";
 import { getReceiverSocketId } from "../lib/socket.js";
