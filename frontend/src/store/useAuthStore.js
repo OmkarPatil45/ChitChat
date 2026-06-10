@@ -4,7 +4,8 @@ import toast from "react-hot-toast";
 import { LogIn } from "lucide-react";
 import { io } from "socket.io-client";
 
-const BASE_URL = import.meta.env.MODE === "production" ? "https://chitchat-dh7g.onrender.com" : "/";
+// const BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:3000" : "/";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
 
 export const useAuthStore = create ((set,get) => ({
     authUser: null,
